@@ -1,0 +1,2 @@
+# angular
+### a Sails application
