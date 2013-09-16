@@ -18,7 +18,8 @@ module.exports = function (grunt) {
                     'assets/vendor/js/sails.io.js',
                     'assets/vendor/js/**/*.js',
                     'assets/js/**/*.js',
-                    'angular/**/*.js'
+                    'angular/application.js',
+                    'angular/**/*.js',
                 ],
                 dest: 'public/bundle/bundle.js',
                 separator: ";"
@@ -47,6 +48,16 @@ module.exports = function (grunt) {
             }
         },
 
+        ngtemplates: {
+            app: {
+                options: {
+                    base: 'angular/views'
+                },
+                src: 'angular/views/**/*.html',
+                dest: 'angular/templates.js'
+            }
+        },
+
         watch: {
             js: {
                 files: ["<%= concat.js.src %>"],
@@ -55,8 +66,13 @@ module.exports = function (grunt) {
             css: {
                 files: ["<%= concat.css.src %>"],
                 tasks: ["concat:css"]
+            },
+            html: {
+                files: ["<%= ngtemplates.app.src %>"],
+                tasks: ["ngtemplates", "concat:js"]
             }
         }
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -64,8 +80,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-angular-templates');
 
-    grunt.registerTask('dev', ['clean', 'concat', 'watch']);
-    grunt.registerTask('prod', ['clean', 'concat', 'uglify', 'cssmin']);
+    grunt.registerTask('dev', ['clean', 'ngtemplates', 'concat', 'watch']);
+    grunt.registerTask('prod', ['clean', 'ngtemplates', 'concat', 'uglify', 'cssmin']);
     grunt.registerTask('default', 'dev');
 };
