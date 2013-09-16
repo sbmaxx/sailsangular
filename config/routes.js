@@ -33,11 +33,7 @@ module.exports.routes = {
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': {
-    view: 'home/index'
-  },
-
-  '/test': {
-    view: 'home/index'
+    view: 'empty'
   }
 
   /*
@@ -166,4 +162,3 @@ module.exports.routes = {
  * Finally, if nothing else matched, the default 404 handler is triggered.
  * See `config/404.js` to adjust your app's 404 logic.
  */
- 
