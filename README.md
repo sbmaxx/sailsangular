@@ -1,2 +1,2 @@
-# angular
-### a Sails application
+# sailsangular
+Sample app of using sails.js & angular.js togeher.
